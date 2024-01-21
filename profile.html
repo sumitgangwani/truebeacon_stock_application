@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .logout-link {
+            text-decoration: none;
+            color: #333;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Profile</h1>
+
+    <div class="profile-info">
+        <label>User ID:</label>
+        <p>{{ user_profile.user_id }}</p>
+
+        <label>User Type:</label>
+        <p>{{ user_profile.user_type }}</p>
+
+        <label>Email:</label>
+        <p>{{ user_profile.email }}</p>
+
+        <label>User Name:</label>
+        <p>{{ user_profile.user_name }}</p>
+
+        <label>Broker:</label>
+        <p>{{ user_profile.broker }}</p>
+    </div>
+
+    <a href="/signin" class="logout-link">Logout</a>
+</body>
+</html>
