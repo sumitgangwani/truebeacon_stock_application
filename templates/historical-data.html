@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Include Moment.js library -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-    <!-- Include Chart.js library -->
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Include date adapter -->
+
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
 </head>
 <body>
-    <!-- Canvas element for the line chart -->
+
     <canvas id="lineChart"></canvas>
 
-    <!-- Script to use Jinja2 and embed the JSON data -->
+
     <script id="jsonData" type="application/json">{{ data|tojson|safe }}</script>
 
     <script>
