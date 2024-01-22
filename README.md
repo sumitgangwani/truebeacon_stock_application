@@ -28,6 +28,9 @@ Minimum Requirements:
 2. GET /historical-data API, must be created which queries the database and returns the data. The API should have query parameters for *symbol,* *from_data* and *to_date* and should return data for a symbol between the input dates for the input symbol
 3. The front-end should call the API and the returned time-series data should be displayed as a chart with prices on Y-axis and date on the X-axis. There should be an input to filter for symbol, and date selector inputs for from_date and to_date for the chart.
 
+![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/8fe41397-b62d-4441-a3a9-f2566f8faa3d)
+
+
 Additional Requirements:
 
 1. Register
