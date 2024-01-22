@@ -8,11 +8,11 @@ This is a Full-Stack application that implements a web-based system with user au
 
 ## Tech Stack
 
-- Programming Language: Python
-- Backend framework: Flask
-- Database: sqlite
+- programming Language: python
+- backend framework: flask
+- database: sqlite
 - template: jinja2
-- Charting Library: chart.js
+- charting library: chart.js
 
 ## Getting Started
 
