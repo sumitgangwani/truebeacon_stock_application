@@ -34,13 +34,21 @@ Minimum Requirements:
 Additional Requirements:
 
 1. Register
+![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/6cb84249-d471-4a4e-bc61-2c99b2d0661c)
+
 2. Login
+![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/8306cfa3-8717-4630-8d63-68640af0a054)
+
 3. View Dashboard
     1. Display Table with data - holdings_response.json
     2. Displays Chart with -historical_prices.csv 
     3. Display Profile information - profile_response.json
-4. Place Order 
+![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/c3f8b961-cbc2-47f5-9b7b-105aea2880b0)
+
+5. Place Order 
     1. Simple form with inputs for Symbol, price and quantity with a button to submit trade which calls an API that returns place_order_response.json
+   ![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/ae7c74fd-c956-475b-bf94-3222c8a30c6e)
+
   
 Front End Requirements (Additional Requirements):
 
