@@ -41,9 +41,13 @@ Additional Requirements:
 
 3. View Dashboard
     1. Display Table with data - holdings_response.json
-    2. Displays Chart with -historical_prices.csv 
-    3. Display Profile information - profile_response.json
 ![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/c3f8b961-cbc2-47f5-9b7b-105aea2880b0)
+    2. Displays Chart with -historical_prices.csv
+![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/8fe41397-b62d-4441-a3a9-f2566f8faa3d)
+    4. Display Profile information - profile_response.json
+![image](https://github.com/sumitgangwani/truebeacon_stock_application/assets/67985559/aaf6887d-37eb-4079-8d9a-cebb717fda28)
+
+
 
 5. Place Order 
     1. Simple form with inputs for Symbol, price and quantity with a button to submit trade which calls an API that returns place_order_response.json
