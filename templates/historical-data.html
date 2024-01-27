@@ -18,28 +18,28 @@
     <script id="jsonData" type="application/json">{{ data|tojson|safe }}</script>
 
     <script>
-        // Retrieve the JSON data from the embedded script
+        
         var jsonDataElement = document.getElementById('jsonData');
         var jsonData = JSON.parse(jsonDataElement.textContent);
 
-        // Filter only the most recent entry for each date
+        
         var uniqueData = {};
         jsonData.data.forEach(entry => {
             var date = entry[0];
             var price = entry[1];
 
-            // Keep only the most recent entry for each date
+            
             uniqueData[date] = price;
         });
 
-        // Extract dates and prices from the filtered data
+        
         var dates = Object.keys(uniqueData);
         var prices = dates.map(date => uniqueData[date]);
 
-        // Convert date strings to Date objects
+        
         var dateObjects = dates.map(dateString => new Date(dateString));
 
-        // Get the canvas element and create the line chart
+        
         var ctx = document.getElementById('lineChart').getContext('2d');
         var lineChart = new Chart(ctx, {
             type: 'line',
