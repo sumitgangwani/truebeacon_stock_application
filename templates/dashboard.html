@@ -1,33 +1,62 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 20px;
+            margin: 0;
+            flex-grow: 1; 
+            text-align: center; 
+            margin-left: 100px;
+        }
+
+        .profile-link, .logout-link {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            margin-right: 20px; 
+            display: inline-block; 
         }
 
         table {
-            width: 100%;
+            width: 80%;
             border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
 
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: center;
             border: 1px solid #ddd;
         }
 
@@ -38,21 +67,21 @@
         button {
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
+            background-color: #333; 
+            color: white; 
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #555;
         }
 
         .loading-spinner {
             display: none;
-            border: 8px solid #f3f3f3; /* Light grey */
-            border-top: 8px solid #3498db; /* Blue */
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -66,22 +95,42 @@
             100% { transform: rotate(360deg); }
         }
 
-        .logout-link, .profile-link {
-            text-decoration: none;
+        #no-data-msg {
             color: #333;
             font-weight: bold;
-            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+        .pnl-box {
+        background-color: #f0f0f0;
+        padding: 2px;
+        margin-top: 20px;
+        border-radius: 4px;
+        padding-left: 440px; 
+
         }
     </style>
 </head>
+
 <body>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <header>
+        <h1>Dashboard</h1>
+
         <div>
-            <h1>Dashboard</h1>
             <a href="/profile" class="profile-link">Profile</a>
+            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
         </div>
-        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
-    </div>
+    </header>
+
+<!--    <div class="flex-container">-->
+<!--        <div>-->
+<!--            <a href="/profile" class="profile-link">Profile</a>-->
+<!--        </div>-->
+<!--        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>-->
+<!--    </div>-->
 
     <div id="loading-spinner" class="loading-spinner"></div>
 
@@ -122,33 +171,24 @@
         <p id="no-data-msg">No holdings data available.</p>
     {% endif %}
 
-
+    <div class="pnl-box">
     {% if total_pnl is defined %}
-        <p>Total PNL: {{ total_pnl }}</p>
+        <p>Total PNL : {{ total_pnl }}</p>
     {% endif %}
-
+    </div>
     <form action="/chart" method="get">
         <button type="submit">Go to Chart</button>
     </form>
 
     <form action="/order" method="get">
-        <button type="submit">Place an Order</button>
+        <button type="submit">Place Order</button>
     </form>
 
-    <script>
-        function showLoadingSpinner() {
-            document.getElementById("loading-spinner").style.display = "block";
-        }
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
 
-        function hideLoadingSpinner() {
-            document.getElementById("loading-spinner").style.display = "none";
-        }
 
-        {% if holdings_data %}
-            hideLoadingSpinner();
-        {% else %}
-            showLoadingSpinner();
-        {% endif %}
-    </script>
+</script>
 </body>
+
 </html>
