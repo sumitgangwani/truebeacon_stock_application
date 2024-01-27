@@ -1,4 +1,4 @@
-
+from flask_socketio import SocketIO
 from flask import Flask, render_template, jsonify, request, session, flash, redirect
 import sqlite3
 import os
@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-
+socketio = SocketIO(app)
 
 def get_db_connection():
     conn = sqlite3.connect('database/truebacon.db')
@@ -82,24 +82,22 @@ def signup():
 
 @app.route('/dashboard')
 def dashboard():
-
     if 'username' not in session:
         return redirect('/signin')
-
 
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM holdings WHERE user_id = ?", (session['username'],))
     holdings_data = cursor.fetchall()
 
-
     total_pnl = sum(holding['pnl'] for holding in holdings_data)
 
     conn.close()
 
 
-    return render_template('dashboard.html', holdings_data=holdings_data, total_pnl=total_pnl)
+    socketio.emit('update_dashboard', {'holdings_data': holdings_data, 'total_pnl': total_pnl}, room=session['username'], namespace='/')
 
+    return render_template('dashboard.html', holdings_data=holdings_data, total_pnl=total_pnl)
 @app.route('/profile')
 def profile():
 
@@ -166,6 +164,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
 
 
