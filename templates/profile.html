@@ -1,7 +1,6 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +8,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         h1 {
@@ -21,20 +25,35 @@
 
         .profile-info {
             margin-top: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            padding: 20px;
+            text-align: left;
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         label {
             font-weight: bold;
         }
 
-        .logout-link {
-            text-decoration: none;
-            color: #333;
+        .logout-button {
             margin-top: 20px;
-            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #333; 
+            color: white; 
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #555;
         }
     </style>
 </head>
+
 <body>
     <h1>User Profile</h1>
 
@@ -55,6 +74,7 @@
         <p>{{ user_profile.broker }}</p>
     </div>
 
-    <a href="/signin" class="logout-link">Logout</a>
+    <button class="logout-button" onclick="window.location.href='/signin'">Logout</button>
 </body>
+
 </html>
