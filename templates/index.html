@@ -1,26 +1,60 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Music Streaming App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
 
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #333; /* Updated background color */
+            color: white; /* Updated text color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555; /* Updated background color on hover */
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <h1>Stock Data Application</h1>
+        <h1>Trading App</h1>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="signin">Sign In</a></li>
-            <li><a href="signup">Sign Up</a></li>
-        </ul>
-    </nav>
+    <main>
+        <button onclick="window.location.href='signin'">Sign In</button>
+        <button onclick="window.location.href='signup'">Sign Up</button>
+    </main>
 
-
-    <footer>
-        <p>App made by Sumit</p>
-    </footer>
 </body>
 
 </html>
