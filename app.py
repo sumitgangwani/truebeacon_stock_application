@@ -65,11 +65,15 @@ def signin():
 def signup():
     if request.method == 'POST':
         username = request.form['user_id']
+        name=request.form['user_name']
+        email=request.form['email']
+
+
         password = request.form['password']
 
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO profile (user_id, password) VALUES (?, ?)", (username, password))
+        cursor.execute("INSERT INTO profile (user_id, user_name, email, password) VALUES (?, ?, ?, ?)", (username, name, email, password))
         conn.commit()
         conn.close()
 
