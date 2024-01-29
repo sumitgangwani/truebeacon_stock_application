@@ -18,7 +18,6 @@ This is a Full-Stack application that implements a web-based system with user au
 
 ### Prerequisites
 
-The python dependencies should be installed using a virtualenv. The list of dependencies has been specified in requirements.txt and should be installed using pip.
 Use pip install -r requirements.txt to install the dependencies.
 
 Tasks completed:
