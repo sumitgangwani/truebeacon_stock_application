@@ -19,6 +19,7 @@ This is a Full-Stack application that implements a web-based system with user au
 ### Prerequisites
 
 The python dependencies should be installed using a virtualenv. The list of dependencies has been specified in requirements.txt and should be installed using pip.
+Use pip install -r requirements.txt to install the dependencies.
 
 Tasks completed:
 
@@ -69,5 +70,10 @@ Front End Requirements (Additional Requirements):
 Backend Requirements (Additional Requirements):
 
 1. Create endpoints for user authentication
-2. Create endpoints that return mock responses (please note that i was fetching from json link and due to excessive api hits, the data was not getting fetched for a while so i had replaced the funcationality of fetching the data from json link to fetching data from database (i have stored the mock responses there too))
+2. Create endpoints that return mock responses
+
+
+* WebSocket connection that publishes dummy price data from the backend which displays on the frontend
+
+* The Project has been hosted on Pythonanywhere and can be viewed by going on the link : https://sumitgangwani99.pythonanywhere.com/
 
