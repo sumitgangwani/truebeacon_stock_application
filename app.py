@@ -2,8 +2,7 @@ from flask_socketio import SocketIO
 from flask import Flask, render_template, jsonify, request, session, flash, redirect
 import sqlite3
 import os
-
-
+import uuid
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -11,26 +10,8 @@ socketio = SocketIO(app)
 
 def get_db_connection():
     conn = sqlite3.connect('database/truebeacon.db')
-    conn.row_factory = sqlite3.Row
+
     return conn
-
-
-def get_historical_data(symbol, from_date, to_date):
-    connection = sqlite3.connect("database/truebeacon.db")
-    cursor = connection.cursor()
-
-    cursor.execute('''
-        SELECT strftime('%Y-%m-%d %H:%M:%S', date) AS formatted_date, price
-        FROM nifty
-        WHERE instrument_name = ? AND date BETWEEN ? AND ?
-    ''', (symbol, from_date, to_date))
-
-    data = cursor.fetchall()
-    connection.close()
-
-    return data
-
-
 
 
 
@@ -59,7 +40,20 @@ def signin():
 
     return render_template('signin.html')
 
+def get_historical_data(symbol, from_date, to_date):
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
+    cursor.execute('''
+        SELECT strftime('%Y-%m-%d %H:%M:%S', date) AS formatted_date, price
+        FROM nifty
+        WHERE instrument_name = ? AND date BETWEEN ? AND ?
+    ''', (symbol, from_date, to_date))
+
+    data = cursor.fetchall()
+    conn.close()
+
+    return data
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -90,6 +84,7 @@ def dashboard():
         return redirect('/signin')
 
     conn = get_db_connection()
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM holdings WHERE user_id = ?", (session['username'],))
     holdings_data = cursor.fetchall()
@@ -114,6 +109,7 @@ def profile():
 
 
     conn = get_db_connection()
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM profile WHERE user_id = ?", (session['username'],))
     user_profile = cursor.fetchone()
@@ -138,13 +134,31 @@ def place_order():
         symbol = request.form['symbol']
         price = float(request.form['price'])
         quantity = int(request.form['quantity'])
+        if 'username' not in session:
+            return jsonify({"status": "error", "message": "User not logged in"})
 
+        username = session['username']
+        order_id = str(uuid.uuid4())
+
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        
+        cursor.execute('''
+            INSERT INTO orders (user_id, order_id, symbol, price, quantity)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (username, order_id, symbol, price, quantity))
+
+        
+        conn.commit()
+        conn.close()
 
         place_order_response = {
             "status": "success",
-            "message": f"Order placed for {quantity} shares of {symbol} at {price} per share."
+            "message": "Order Placed Successfully",
+            "order_id": f"{order_id}"
         }
-
 
         return jsonify(place_order_response)
 
@@ -173,5 +187,3 @@ def logout():
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
-
-
