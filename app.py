@@ -10,13 +10,13 @@ app.secret_key = os.urandom(24)
 socketio = SocketIO(app)
 
 def get_db_connection():
-    conn = sqlite3.connect('database/truebacon.db')
+    conn = sqlite3.connect('database/truebeacon.db')
     conn.row_factory = sqlite3.Row
     return conn
 
 
 def get_historical_data(symbol, from_date, to_date):
-    connection = sqlite3.connect("database/truebacon.db")
+    connection = sqlite3.connect("database/truebeacon.db")
     cursor = connection.cursor()
 
     cursor.execute('''
@@ -95,7 +95,11 @@ def dashboard():
     conn.close()
 
 
-    socketio.emit('update_dashboard', {'holdings_data': holdings_data, 'total_pnl': total_pnl}, room=session['username'], namespace='/')
+    holdings_data_dict = [dict(row) for row in holdings_data]
+
+
+    socketio.emit('update_dashboard', {'holdings_data': holdings_data_dict, 'total_pnl': total_pnl},
+                  room=session['username'], namespace='/')
 
     return render_template('dashboard.html', holdings_data=holdings_data, total_pnl=total_pnl)
 @app.route('/profile')
@@ -163,7 +167,7 @@ def logout():
     return redirect('/')
 
 
-# if __name__ == '__main__':
-#     socketio.run(app, debug=True, allow_unsafe_werkzeug=True)
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
 
 
